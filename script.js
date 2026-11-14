@@ -40,16 +40,18 @@ ketik();
 document.getElementById("tahun").textContent = new Date().getFullYear();
 // Tombol salin email
 const salin = document.getElementById("salin");
-salin.addEventListener("click", async () => {
-  const email = "masmunandar11@gmail.com";
-  try {
-    await navigator.clipboard.writeText(email);
-    salin.textContent = "Tersalin ✓";
-  } catch {
-    salin.textContent = email;
-  }
-  setTimeout(() => (salin.textContent = "Salin Email"), 2000);
-});
+if (salin) {
+  salin.addEventListener("click", async () => {
+    const email = "masmunandar11@gmail.com";
+    try {
+      await navigator.clipboard.writeText(email);
+      salin.textContent = "Tersalin ✓";
+    } catch {
+      salin.textContent = email;
+    }
+    setTimeout(() => (salin.textContent = "Salin Email"), 2000);
+  });
+}
 // ===== ID Card gantung =====
 (function () {
   const wadah = document.getElementById("wadah");
@@ -131,3 +133,109 @@ salin.addEventListener("click", async () => {
 // Gandakan isi strip teknologi supaya putarannya tanpa putus
 const stackTrack = document.getElementById("stackTrack");
 if (stackTrack) stackTrack.innerHTML += stackTrack.innerHTML;
+// ===== Sertifikat: klik untuk memperbesar =====
+(function () {
+  const lightbox = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const tutup = document.getElementById("lbTutup");
+  if (!lightbox || !lbImg) return;
+
+  function buka(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt || "";
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function tutupLb() {
+    lightbox.hidden = true;
+    lbImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".sertif-thumb").forEach((tombol) => {
+    tombol.addEventListener("click", () => {
+      const img = tombol.querySelector("img");
+      if (img) buka(img.src, img.alt);
+    });
+  });
+
+  lightbox.addEventListener("click", (e) => { if (e.target !== lbImg) tutupLb(); });
+  tutup.addEventListener("click", tutupLb);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lightbox.hidden) tutupLb(); });
+})();
+// ===== Formulir kontak: buka Gmail dengan pesan terisi =====
+const formKontak = document.getElementById("formKontak");
+if (formKontak) {
+  formKontak.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nama = formKontak.elements.nama.value.trim();
+    const email = formKontak.elements.email.value.trim();
+    const pesan = formKontak.elements.pesan.value.trim();
+
+    const subjek = encodeURIComponent("Pesan dari " + nama);
+    const isi = encodeURIComponent("Nama: " + nama + "\nEmail: " + email + "\n\n" + pesan);
+
+    window.open(
+      "https://mail.google.com/mail/?view=cm&fs=1&to=masmunandar11@gmail.com&su=" + subjek + "&body=" + isi,
+      "_blank",
+      "noopener"
+    );
+    formKontak.reset();
+  });
+}
+// ===== Slider (dipakai proyek & sertifikat) =====
+function buatSlider(idTrack, idPrev, idNext, idDots) {
+  const track = document.getElementById(idTrack);
+  const prev = document.getElementById(idPrev);
+  const next = document.getElementById(idNext);
+  const dots = document.getElementById(idDots);
+  if (!track || !prev || !next || !dots) return;
+
+  const slides = Array.from(track.children);
+  let aktif = 0;
+
+  // jarak antar slide (lebar kartu + gap)
+  const langkah = () =>
+    slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth || 1;
+  // banyaknya posisi geser yang mungkin
+  const jumlah = () =>
+    Math.max(1, Math.round((track.scrollWidth - track.clientWidth) / langkah()) + 1);
+
+  function bangunTitik() {
+    dots.innerHTML = "";
+    for (let i = 0; i < jumlah(); i++) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Ke posisi " + (i + 1));
+      b.addEventListener("click", () => pergi(i));
+      dots.appendChild(b);
+    }
+  }
+
+  function pergi(i) {
+    aktif = Math.max(0, Math.min(jumlah() - 1, i));
+    track.scrollTo({ left: aktif * langkah(), behavior: "smooth" });
+  }
+
+  function perbarui() {
+    const maks = jumlah() - 1;
+    const ujung = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    aktif = ujung ? maks : Math.max(0, Math.min(maks, Math.round(track.scrollLeft / langkah())));
+    Array.from(dots.children).forEach((d, n) => d.classList.toggle("aktif", n === aktif));
+    prev.disabled = aktif === 0;
+    next.disabled = aktif >= maks;
+  }
+
+  prev.addEventListener("click", () => pergi(aktif - 1));
+  next.addEventListener("click", () => pergi(aktif + 1));
+  track.addEventListener("scroll", () => requestAnimationFrame(perbarui), { passive: true });
+  window.addEventListener("resize", () => {
+    bangunTitik();
+    perbarui();
+  });
+  bangunTitik();
+  perbarui();
+}
+
+buatSlider("proyekTrack", "proyekPrev", "proyekNext", "proyekDots");
+buatSlider("sertifTrack", "sertifPrev", "sertifNext", "sertifDots");
