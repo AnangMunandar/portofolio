@@ -57,17 +57,27 @@ salin.addEventListener("click", async () => {
   const kartu = document.getElementById("idCard");
   if (!wadah || !gantung || !kartu) return;
 
-  // QR code ke Instagram
+    // QR code ke Instagram
   const qr = document.getElementById("qr");
-  if (window.QRCode && qr) {
-    new QRCode(qr, {
-      text: "https://www.instagram.com/anangmnndr",
-      width: 110,
-      height: 110,
-      colorDark: "#0b0b10",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M,
-    });
+  const linkIg = "https://www.instagram.com/anangmnndr";
+  if (qr) {
+    if (window.QRCode) {
+      qr.innerHTML = "";
+      new QRCode(qr, {
+        text: linkIg,
+        width: 110,
+        height: 110,
+        colorDark: "#0b0b10",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M,
+      });
+    } else {
+      // Cadangan kalau library gagal dimuat
+      const img = document.createElement("img");
+      img.alt = "QR code Instagram";
+      img.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=" + encodeURIComponent(linkIg);
+      qr.appendChild(img);
+    }
   }
 
   // Fisika ayunan sederhana
