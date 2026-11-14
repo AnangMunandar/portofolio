@@ -128,3 +128,6 @@ salin.addEventListener("click", async () => {
   gambar();
   mulai();
 })();
+// Gandakan isi strip teknologi supaya putarannya tanpa putus
+const stackTrack = document.getElementById("stackTrack");
+if (stackTrack) stackTrack.innerHTML += stackTrack.innerHTML;
