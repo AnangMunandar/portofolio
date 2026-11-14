@@ -38,3 +38,15 @@ ketik();
 
 // Tahun footer
 document.getElementById("tahun").textContent = new Date().getFullYear();
+// Tombol salin email
+const salin = document.getElementById("salin");
+salin.addEventListener("click", async () => {
+  const email = "masmunandar11@gmail.com";
+  try {
+    await navigator.clipboard.writeText(email);
+    salin.textContent = "Tersalin ✓";
+  } catch {
+    salin.textContent = email;
+  }
+  setTimeout(() => (salin.textContent = "Salin Email"), 2000);
+});
