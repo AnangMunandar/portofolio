@@ -264,11 +264,10 @@ button.btn-ghost { border: 1px solid var(--gold); }
   .wadah { align-self: center; margin-top: 0; }
   .tali { height: 90px; }
 }
-/* ===== Strip teknologi berjalan ===== */
+/* ===== Strip teknologi berjalan (kecil, di Hero) ===== */
 .stack {
-  border-block: 1px solid var(--line);
-  background: var(--panel);
-  padding: 22px 0;
+  margin-top: 30px;
+  max-width: 520px;
 }
 .stack-viewport {
   overflow: hidden;
@@ -277,33 +276,29 @@ button.btn-ghost { border: 1px solid var(--gold); }
 }
 .stack-track {
   display: flex;
-  gap: 16px;
+  gap: 10px;
   width: max-content;
-  animation: geser-stack 32s linear infinite;
+  animation: geser-stack 26s linear infinite;
 }
 .stack:hover .stack-track { animation-play-state: paused; }
 
 .chip {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 22px;
+  gap: 8px;
+  padding: 6px 14px;
   background: #141420;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 10px;
   color: var(--text);
-  font-size: .9rem;
+  font-size: .78rem;
   font-weight: 500;
   white-space: nowrap;
-  transition: transform .3s, border-color .3s, box-shadow .3s;
+  transition: transform .3s, border-color .3s;
 }
-.chip:hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
-  box-shadow: 0 10px 28px rgba(212, 175, 55, .15);
-}
-.chip img { width: 26px; height: 26px; object-fit: contain; }
+.chip:hover { transform: translateY(-2px); border-color: var(--gold); }
+.chip img { width: 18px; height: 18px; object-fit: contain; }
 
 @keyframes geser-stack {
-  to { transform: translateX(calc(-50% - 8px)); }
+  to { transform: translateX(calc(-50% - 5px)); }
 }
