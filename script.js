@@ -50,3 +50,71 @@ salin.addEventListener("click", async () => {
   }
   setTimeout(() => (salin.textContent = "Salin Email"), 2000);
 });
+// ===== ID Card gantung =====
+(function () {
+  const wadah = document.getElementById("wadah");
+  const gantung = document.getElementById("gantung");
+  const kartu = document.getElementById("idCard");
+  if (!wadah || !gantung || !kartu) return;
+
+  // QR code ke Instagram
+  const qr = document.getElementById("qr");
+  if (window.QRCode && qr) {
+    new QRCode(qr, {
+      text: "https://www.instagram.com/anangmnndr",
+      width: 110,
+      height: 110,
+      colorDark: "#0b0b10",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+  }
+
+  // Fisika ayunan sederhana
+  const gerakKurang = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let sudut = gerakKurang ? 0 : 14;
+  let kecepatan = 0;
+  let tarik = false;
+  let jalan = false;
+
+  function gambar() { gantung.style.transform = `rotate(${sudut}deg)`; }
+
+  function langkah() {
+    if (!tarik) {
+      kecepatan += -0.018 * sudut;
+      kecepatan *= 0.975;
+      sudut += kecepatan;
+      if (Math.abs(sudut) < 0.02 && Math.abs(kecepatan) < 0.02) {
+        sudut = 0; kecepatan = 0; gambar(); jalan = false; return;
+      }
+    }
+    gambar();
+    requestAnimationFrame(langkah);
+  }
+  function mulai() { if (!jalan) { jalan = true; requestAnimationFrame(langkah); } }
+
+  kartu.addEventListener("pointerdown", (e) => {
+    tarik = true;
+    kartu.classList.add("tarik");
+    kartu.setPointerCapture(e.pointerId);
+    mulai();
+  });
+
+  kartu.addEventListener("pointermove", (e) => {
+    if (!tarik) return;
+    const r = wadah.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = Math.max(e.clientY - r.top, 80);
+    const deg = -Math.atan2(dx, dy) * 180 / Math.PI;
+    const baru = Math.max(-40, Math.min(40, deg));
+    kecepatan = (baru - sudut) * 0.5;
+    sudut = baru;
+  });
+
+  function lepas() { tarik = false; kartu.classList.remove("tarik"); mulai(); }
+  kartu.addEventListener("pointerup", lepas);
+  kartu.addEventListener("pointercancel", lepas);
+
+  gambar();
+  mulai();
+})();

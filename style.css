@@ -169,3 +169,98 @@ button.btn-ghost { border: 1px solid var(--gold); }
   .tentang-grid { grid-template-columns: 1fr; gap: 40px; }
   .foto { max-width: 220px; margin: 0 auto; }
 }
+/* ===== ID Card gantung ===== */
+.hero {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.hero-teks { flex: 1; min-width: 0; }
+.hero h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); }
+
+.wadah {
+  width: 260px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: -110px;
+}
+.gantung {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+.tali {
+  width: 16px;
+  height: 150px;
+  background:
+    repeating-linear-gradient(45deg, rgba(0,0,0,.25) 0 4px, transparent 4px 8px),
+    linear-gradient(90deg, #a8841f, var(--gold2), #a8841f);
+  box-shadow: 0 0 12px rgba(212,175,55,.25);
+}
+.klip {
+  width: 30px;
+  height: 22px;
+  margin-top: -2px;
+  border: 3px solid #8d8a82;
+  border-radius: 6px 6px 12px 12px;
+  background: #15151b;
+  position: relative;
+  z-index: 2;
+}
+.id-card {
+  position: relative;
+  width: 260px;
+  margin-top: -6px;
+  padding: 44px 22px 22px;
+  text-align: center;
+  background: linear-gradient(160deg, #151520, #0c0c12);
+  border: 1px solid rgba(212,175,55,.45);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 40px rgba(212,175,55,.08);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+.id-card.tarik { cursor: grabbing; }
+.lubang {
+  position: absolute;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  width: 56px; height: 8px;
+  border-radius: 99px;
+  background: #050508;
+  border: 1px solid var(--line);
+}
+.id-foto {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 5px rgba(212,175,55,.15);
+  pointer-events: none;
+}
+.id-card h3 { font-size: 1.3rem; margin: 14px 0 2px; }
+.id-role { color: var(--gold2); font-size: .9rem; }
+.id-kampus { color: var(--muted); font-size: .78rem; margin-top: 2px; }
+.garis { border-top: 1px dashed var(--line); margin: 16px 0; }
+.qr {
+  display: inline-block;
+  padding: 8px;
+  background: #fff;
+  border-radius: 10px;
+  line-height: 0;
+}
+.qr img, .qr canvas { width: 110px !important; height: 110px !important; }
+.id-card small { display: block; margin-top: 10px; color: var(--muted); font-size: .72rem; }
+
+@media (max-width: 800px) {
+  .hero { flex-direction: column; align-items: flex-start; padding-bottom: 60px; }
+  .wadah { align-self: center; margin-top: 0; }
+  .tali { height: 90px; }
+}
