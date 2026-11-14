@@ -136,3 +136,36 @@ footer { text-align: center; padding: 34px 20px; color: var(--muted); font-size:
 button.btn { font-family: inherit; cursor: pointer; border: 0; }
 button.btn-ghost { border: 1px solid var(--gold); }
 .email-teks { margin-top: 14px; color: var(--gold2); letter-spacing: .05em; }
+/* Foto di bagian Tentang */
+.tentang-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.foto { position: relative; margin: 0; }
+.foto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border-radius: 20px;
+  border: 1px solid var(--gold);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, .6);
+}
+.foto::after {
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border: 1px solid rgba(212, 175, 55, .4);
+  border-radius: 20px;
+  z-index: 0;
+}
+
+@media (max-width: 800px) {
+  .tentang-grid { grid-template-columns: 1fr; gap: 40px; }
+  .foto { max-width: 220px; margin: 0 auto; }
+}
