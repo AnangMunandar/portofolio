@@ -32,9 +32,13 @@ main, footer, .nav { position: relative; z-index: 1; }
 section { max-width: 1000px; margin: auto; padding: 110px 24px; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; }
 h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 24px; }
-em { font-style: italic;
+em {
+  font-style: italic;
   background: linear-gradient(120deg, var(--gold), var(--gold2), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent; }
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  padding-right: .15em;
+  margin-right: -.15em;
+}
 .eyebrow { text-transform: uppercase; letter-spacing: .3em; font-size: .75rem;
   color: var(--gold); margin-bottom: 18px; font-weight: 500; }
 .isi, .lead { color: var(--muted); max-width: 620px; font-size: 1.05rem; }
