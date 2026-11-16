@@ -80,7 +80,7 @@ em {
 
 /* Navbar */
 .nav { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center;
-  padding: 18px 5%; background: rgba(0,49,83,.85); backdrop-filter: blur(14px);
+  padding: 18px 5%; background: rgba(130,130,130,.85); backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent; transition: border-color .3s; z-index: 50; }
 .nav.scrolled { border-color: var(--line); }
 .logo { font-family: var(--serif); font-size: 1.5rem; color: var(--text); text-decoration: none; letter-spacing: .05em; }
