@@ -1,9 +1,9 @@
 :root {
-  /* Abu-abu gelap: HEX #363636 | RGB 54,54,54 */
-  --prusia: #363636;
-  --prusia-gelap: #2b2b2b;
-  --prusia-tua: #202020;
-  --prusia-terang: #444444;
+  /* Biru Prusia: HEX #003153 | RGB 0,49,83 | CMYK 100,41,0,67 */
+  --prusia: #003153;
+  --prusia-gelap: #00243d;
+  --prusia-tua: #001a2e;
+  --prusia-terang: #0a4a73;
   --bg: var(--prusia);
   --navy: var(--prusia);
   --royal: var(--prusia);
@@ -11,7 +11,7 @@
   --navy-2: var(--prusia);
   --royal-1: var(--prusia);
   --royal-2: var(--prusia);
-  --panel: rgba(32, 32, 32, .55);
+  --panel: rgba(0, 26, 46, .55);
   --line: rgba(255, 255, 255, .1);
   --text: #eef0f6;
   --muted: #a9b3cf;
@@ -54,7 +54,7 @@ em {
   color: var(--gold); margin-bottom: 18px; font-weight: 500; }
 .isi, .lead { color: var(--muted); max-width: 620px; font-size: 1.05rem; }
 
-/* ===== Background per bagian: abu-abu gelap #363636 ===== */
+/* ===== Background per bagian: biru prusia #003153 ===== */
 #home, #tentang, #keahlian, #proyek, #sertifikat, #kontak {
   position: relative;
   isolation: isolate;
@@ -80,7 +80,7 @@ em {
 
 /* Navbar */
 .nav { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center;
-  padding: 18px 5%; background: rgba(54, 54, 54, .85); backdrop-filter: blur(14px);
+  padding: 18px 5%; background: rgba(0,49,83,.85); backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent; transition: border-color .3s; z-index: 50; }
 .nav.scrolled { border-color: var(--line); }
 .logo { font-family: var(--serif); font-size: 1.5rem; color: var(--text); text-decoration: none; letter-spacing: .05em; }
@@ -132,7 +132,7 @@ em {
 .browser { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #000;
   box-shadow: 0 30px 60px rgba(0,0,0,.5); }
 .bar { display: flex; gap: 6px; padding: 10px 14px; background: var(--prusia-gelap); }
-.bar i { width: 10px; height: 10px; border-radius: 50%; background: #5a5a5a; }
+.bar i { width: 10px; height: 10px; border-radius: 50%; background: #2b6288; }
 .bar i:first-child { background: var(--gold); }
 .layar { position: relative; min-height: 220px; display: grid; place-items: center;
   background: linear-gradient(135deg, var(--prusia-gelap), var(--prusia-tua)); }
@@ -325,7 +325,7 @@ button.btn-ghost { border: 1px solid var(--gold); }
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
-  background: rgba(32, 32, 32, .6);
+  background: rgba(0, 26, 46, .6);
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--text);
@@ -486,7 +486,7 @@ button.btn-ghost { border: 1px solid var(--gold); }
   max-width: 560px;
   padding: 26px 28px;
   text-align: center;
-  background: rgba(32, 32, 32, .55);
+  background: rgba(0, 26, 46, .55);
   border: 1px solid rgba(212, 175, 55, .3);
   border-radius: 18px;
 }
@@ -545,7 +545,7 @@ button.btn-ghost { border: 1px solid var(--gold); }
   display: grid;
   gap: 8px;
   padding: 28px;
-  background: rgba(32, 32, 32, .6);
+  background: rgba(0, 26, 46, .6);
   border: 1px solid rgba(212, 175, 55, .25);
   border-radius: 18px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
@@ -558,7 +558,7 @@ button.btn-ghost { border: 1px solid var(--gold); }
   font-family: inherit;
   font-size: .95rem;
   color: var(--text);
-  background: rgba(32, 32, 32, .8);
+  background: rgba(0, 26, 46, .8);
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 10px;
   outline: none;
@@ -740,10 +740,10 @@ button.btn-ghost { border: 1px solid var(--gold); }
   --text: #f4efe4;
   --muted: #aab8cb;
   --hairline: rgba(200, 169, 106, .28);
-  --panel: linear-gradient(160deg, rgba(68, 68, 68, .35), rgba(32, 32, 32, .72));
+  --panel: linear-gradient(160deg, rgba(10, 74, 115, .35), rgba(0, 26, 46, .72));
 }
 body { font-weight: 300; line-height: 1.85; letter-spacing: .01em; }
-::selection { background: var(--gold); color: #202020; }
+::selection { background: var(--gold); color: #001a2e; }
 
 /* Tipografi */
 h1, h2, h3 { font-weight: 500; letter-spacing: .005em; }
@@ -774,22 +774,22 @@ h3 { font-weight: 600; }
 
 /* Tombol: lebih ramping dan tegas */
 .btn, .nav-cta { border-radius: 2px; letter-spacing: .16em; font-size: .78rem; text-transform: uppercase; font-weight: 500; }
-.btn { padding: 15px 38px; color: #202020; box-shadow: 0 10px 30px rgba(0, 0, 0, .28); }
+.btn { padding: 15px 38px; color: #001a2e; box-shadow: 0 10px 30px rgba(0, 0, 0, .28); }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(200, 169, 106, .25); }
 .btn-ghost { color: var(--gold2); border-color: var(--gold); }
 .btn-ghost:hover { background: rgba(200, 169, 106, .12); }
 .btn-small { padding: 11px 28px; }
 .nav-cta { padding: 9px 24px; }
-.nav-cta:hover { color: #202020 !important; }
+.nav-cta:hover { color: #001a2e !important; }
 .badge { border-radius: 2px; letter-spacing: .18em; border-color: var(--hairline); color: var(--gold2); }
 
 /* Kartu: sudut tipis, garis emas halus, bayangan tenang */
 .kartu, .proyek, .sertif {
   background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .05);
+  box-shadow: 0 24px 60px rgba(0, 12, 24, .35), inset 0 1px 0 rgba(255, 255, 255, .05);
 }
 .kartu { padding: 40px 32px; }
-.kartu:hover, .sertif:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 30px 70px rgba(0, 0, 0, .5); }
+.kartu:hover, .sertif:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 30px 70px rgba(0, 12, 24, .5); }
 .kartu h3 { font-size: 1.7rem; }
 .no { font-style: italic; font-size: 1.15rem; }
 .proyek { padding: 44px; gap: 56px; }
@@ -800,7 +800,7 @@ h3 { font-weight: 600; }
 
 /* Slider: kontrol lebih halus */
 .slider-btn { border-radius: 2px; border-color: var(--hairline); color: var(--gold2); }
-.slider-btn:hover:not(:disabled) { background: var(--gold); color: #202020; border-color: var(--gold); }
+.slider-btn:hover:not(:disabled) { background: var(--gold); color: #001a2e; border-color: var(--gold); }
 .slider-dots button { border-radius: 1px; width: 22px; height: 2px; background: rgba(255, 255, 255, .22); }
 .slider-dots button.aktif { width: 44px; background: var(--gold); }
 
@@ -811,3 +811,32 @@ h3 { font-weight: 600; }
   .proyek { padding: 24px; gap: 28px; }
   .kartu { padding: 30px 24px; }
 }
+
+/* =====================================================
+   PALET BARU: biru malam + kartu slate + aksen krem emas
+   Tempel di PALING BAWAH style.css
+   ===================================================== */
+:root {
+  --prusia: #0F172A;          /* background utama */
+  --prusia-gelap: #0B1220;
+  --prusia-tua: #0B1220;
+  --prusia-terang: #1E293B;
+  --panel: #1E293B;           /* background kartu */
+  --text: #F1F5F9;            /* teks utama */
+  --muted: #94A3B8;           /* teks sekunder */
+  --gold: #C5A880;            /* aksen */
+  --gold2: #E3D2B3;
+  --hairline: rgba(197, 168, 128, .28);
+  --line: rgba(255, 255, 255, .08);
+}
+::selection { background: var(--gold); color: #0F172A; }
+
+.nav { background: rgba(15, 23, 42, .85); }
+.bar i { background: #475569; }
+.chip { background: rgba(30, 41, 59, .8); }
+.edu { background: #1E293B; border-color: var(--hairline); }
+.kontak-form { background: #1E293B; border-color: var(--hairline); }
+.kontak-form input, .kontak-form textarea { background: #0F172A; }
+.kontak-form input::placeholder, .kontak-form textarea::placeholder { color: #64748B; }
+.btn:not(.btn-ghost), .nav-cta:hover, .slider-btn:hover:not(:disabled), .lb-tutup:hover { color: #0F172A !important; }
+.glow { background: radial-gradient(circle, rgba(197, 168, 128, .06), transparent 65%); }
