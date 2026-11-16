@@ -239,3 +239,33 @@ function buatSlider(idTrack, idPrev, idNext, idDots) {
 
 buatSlider("proyekTrack", "proyekPrev", "proyekNext", "proyekDots");
 buatSlider("sertifTrack", "sertifPrev", "sertifNext", "sertifDots");
+
+// ===== Menu aktif + animasi saat menu diklik =====
+(function () {
+  const tautan = Array.from(document.querySelectorAll(".nav nav a"));
+  const daftar = tautan
+    .map((a) => ({ a, bagian: document.querySelector(a.getAttribute("href")) }))
+    .filter((x) => x.bagian);
+
+  // Tandai menu sesuai bagian yang sedang tampil di tengah layar
+  const pantau = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      daftar.forEach((x) => x.a.classList.toggle("aktif", x.bagian === e.target));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  daftar.forEach((x) => pantau.observe(x.bagian));
+
+  // Saat menu diklik: judul bagian tujuan muncul dengan efek sorot
+  daftar.forEach(({ a, bagian }) => {
+    a.addEventListener("click", () => {
+      const judul = bagian.querySelector("h1, h2");
+      if (!judul) return;
+      setTimeout(() => {
+        judul.classList.remove("sorot");
+        void judul.offsetWidth; // mulai ulang animasi
+        judul.classList.add("sorot");
+      }, 450);
+    });
+  });
+})();
