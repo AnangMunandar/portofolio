@@ -269,3 +269,21 @@ buatSlider("sertifTrack", "sertifPrev", "sertifNext", "sertifDots");
     });
   });
 })();
+
+// ===== Menu hamburger (tampilan HP) =====
+(function () {
+  const header = document.getElementById("nav");
+  const tombol = document.getElementById("menuBtn");
+  if (!header || !tombol) return;
+
+  function atur(buka) {
+    header.classList.toggle("menu-buka", buka);
+    tombol.setAttribute("aria-expanded", String(buka));
+    tombol.setAttribute("aria-label", buka ? "Tutup menu" : "Buka menu");
+  }
+
+  tombol.addEventListener("click", () => atur(!header.classList.contains("menu-buka")));
+  header.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", () => atur(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") atur(false); });
+  window.addEventListener("resize", () => { if (innerWidth > 800) atur(false); });
+})();
