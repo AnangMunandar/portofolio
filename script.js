@@ -287,3 +287,82 @@ buatSlider("sertifTrack", "sertifPrev", "sertifNext", "sertifDots");
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") atur(false); });
   window.addEventListener("resize", () => { if (innerWidth > 800) atur(false); });
 })();
+
+// ===== Efek scroll mewah =====
+// Hapus blok ini (sampai akhir file) bila ingin kembali tanpa efek.
+(function () {
+  const kurangGerak = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (kurangGerak) return;
+  const bisaHover = matchMedia("(hover: hover)").matches;
+
+  // Jeda berurutan: dipakai saat elemen pertama kali muncul, lalu dilepas
+  function berurutan(daftar, jarak, awal) {
+    daftar.forEach((el, i) => {
+      el.style.transitionDelay = (awal + i * jarak) + "ms";
+      el.addEventListener("transitionend", (e) => {
+        if (e.target === el) el.style.transitionDelay = "";
+      });
+    });
+  }
+
+  // Teks hero muncul berurutan
+  berurutan(Array.from(document.querySelectorAll(".hero-teks .reveal")).filter((el) => el.tagName !== "H1"), 140, 450);
+  // Kartu keahlian muncul berurutan
+  berurutan(Array.from(document.querySelectorAll(".grid3 .kartu")), 130, 0);
+
+  // Judul hero: pecah per kata
+  const h1 = document.querySelector(".hero h1");
+  if (h1) {
+    let n = 0;
+    const bungkus = (teks) => {
+      const wadahKata = document.createDocumentFragment();
+      teks.split(/(\s+)/).forEach((t) => {
+        if (!t) return;
+        if (/^\s+$/.test(t)) { wadahKata.appendChild(document.createTextNode(" ")); return; }
+        const luar = document.createElement("span");
+        luar.className = "kata";
+        const dalam = document.createElement("span");
+        dalam.className = "kata-isi";
+        dalam.style.transitionDelay = 150 + n++ * 170 + "ms";
+        dalam.textContent = t;
+        luar.appendChild(dalam);
+        wadahKata.appendChild(luar);
+      });
+      return wadahKata;
+    };
+    Array.from(h1.childNodes).forEach((node) => {
+      if (node.nodeType === 3) node.replaceWith(bungkus(node.textContent));
+      else if (node.nodeType === 1) { const t = node.textContent; node.textContent = ""; node.appendChild(bungkus(t)); }
+    });
+    h1.classList.add("h1-kata");
+  }
+
+  // Nomor urut untuk kartu di dalam slider
+  document.querySelectorAll(".slider-track").forEach((track) => {
+    Array.from(track.children).forEach((kartu, i) => kartu.style.setProperty("--i", Math.min(i, 3)));
+  });
+
+  if (!bisaHover) return;
+
+  // Kilau mengikuti kursor di atas kartu
+  document.querySelectorAll(".kartu, .proyek, .sertif").forEach((el) => {
+    el.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", e.clientX - r.left + "px");
+      el.style.setProperty("--my", e.clientY - r.top + "px");
+    });
+  });
+
+  // Cahaya latar hero bergeser pelan (layar besar saja)
+  const besar = matchMedia("(min-width: 801px)");
+  let tunggu = false;
+  window.addEventListener("scroll", () => {
+    if (tunggu) return;
+    tunggu = true;
+    requestAnimationFrame(() => {
+      tunggu = false;
+      if (!besar.matches) return;
+      document.documentElement.style.setProperty("--par", String(Math.min(scrollY, 1400)));
+    });
+  }, { passive: true });
+})();
