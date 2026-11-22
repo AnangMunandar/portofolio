@@ -18,7 +18,7 @@ const progress = document.getElementById("progress");
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () => {
   const tinggi = document.documentElement.scrollHeight - innerHeight;
-  progress.style.width = (scrollY / tinggi) * 100 + "%";
+  progress.style.width = (tinggi > 0 ? (scrollY / tinggi) * 100 : 0) + "%";
   nav.classList.toggle("scrolled", scrollY > 20);
 });
 
