@@ -856,3 +856,46 @@ h3 { font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   .sorot { animation: none; }
 }
+
+/* =====================================================
+   PERBAIKAN TAMPILAN HP
+   ===================================================== */
+.menu-btn { display: none; }
+
+@media (max-width: 800px) {
+  /* Kolom teks hero tidak boleh lebih lebar dari layar */
+  .hero { align-items: stretch; }
+  .hero-teks { width: 100%; min-width: 0; }
+  .stack { max-width: 100%; }
+  .stack-viewport { max-width: 100%; }
+
+  /* Menu hamburger */
+  .menu-btn {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 44px; height: 44px; padding: 0 11px;
+    background: transparent; border: 1px solid var(--hairline); border-radius: 10px;
+    cursor: pointer;
+  }
+  .menu-btn span {
+    display: block; height: 2px; background: var(--gold); border-radius: 2px;
+    transition: transform .3s, opacity .3s;
+  }
+  .nav.menu-buka .menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.menu-buka .menu-btn span:nth-child(2) { opacity: 0; }
+  .nav.menu-buka .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav nav {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 8px 5% 22px;
+    background: #0F172A;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav.menu-buka nav { display: flex; }
+  .nav nav a:not(.nav-cta) {
+    display: block; padding: 14px 0; border-bottom: 1px solid var(--line);
+  }
+  .nav nav a:not(.nav-cta)::after { display: none; }
+  .nav nav .nav-cta { align-self: flex-start; margin-top: 18px; }
+}
